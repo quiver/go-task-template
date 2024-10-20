@@ -4,6 +4,7 @@ tasks:
   go:test:
     cmds:
       - go test -v
+
   hello:
     cmds:
       - echo 'Hello World from Task!'
