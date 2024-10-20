@@ -1,0 +1,35 @@
+name: Go
+on: [push]
+
+env:
+  GO_VERSION: "1.23"
+  TASK_VERSION: "3.39.x"
+
+jobs:
+  task-hello:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Task
+        uses: arduino/setup-task@v2
+        with:
+          version: ${{ env.TASK_VERSION}}
+      - name: Run Task
+        run: task hello
+
+  task-go:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Go ${{ env.GO_VERSION}}
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ env.GO_VERSION}}
+
+      - name: Install Task
+        uses: arduino/setup-task@v2
+        with:
+          version: ${{ env.TASK_VERSION}}
+      - name: Run tests
+        run: task go:test
